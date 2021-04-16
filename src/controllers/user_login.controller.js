@@ -41,5 +41,12 @@ exports.login = (req, res) => {
             }
         })
     }
-    
+}
+
+exports.register = (req, res) => {
+    let newUser = new user_login(req.body)
+    user_login.register(newUser, (err, res)=>{
+        console.log(res)
+        res.send("Register done!")
+    })
 }
