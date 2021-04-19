@@ -7,13 +7,15 @@ exports.findAll = (req, res)=>{
         console.log(err);
         else{
             console.log(user_login);
-            return res.send(user_login)
+            res.send(user_login)
         }
     })
 }
 
 exports.login = (req, res) => {
     let loginInfo = req.body
+    console.log(req.body)
+    console.log("131545")
     if(loginInfo.constructor === Object && Object.keys(loginInfo).length === 0){
         return res.status(400).send({ error:true, message: 'Invalid username or password' });
     }

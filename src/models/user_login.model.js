@@ -8,7 +8,7 @@ var user_login = function(user_login){
 }
 
 user_login.findAll = (result) => {
-    dbConn.query("select * from user_login", (err, res)=>{
+    var a = dbConn.query("select * from user_login", (err, res) => {
         if(err)
         {
             result(err, null)
