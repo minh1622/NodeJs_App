@@ -1,6 +1,8 @@
 'use strict';
 const dbConn = require('../../config/db.config')
-
+const mysql = require('mysql')
+const jwt = require('jsonwebtoken')
+var checkLogin = false
 var user_login = function(user_login){
     this.username       = user_login.username,
     this.password       = user_login.password,
@@ -21,31 +23,20 @@ user_login.findAll = (result) => {
 }
 
 user_login.login = (loginInfo, result) => {
-    dbConn.query("select * from user_login", (err, res)=>{
-        if(err)
-        {
-            result(err, false)
+    dbConn.query(`SELECT * FROM user_login where username=${mysql.escape(loginInfo.username)} and password=${mysql.escape(loginInfo.password)}`, (err, res)=>{
+        if(err || res.length == 0){
+            console.log("query fail")
+            return result(true)
         }
         else{
-            let checkLogin
-            let i = 0
-            res.forEach(user => {
-                if(loginInfo.username == user.username && loginInfo.password == user.password)
-                {
-                    checkLogin = {
-                        check: true,
-                        role: user.user_role
-                    }
-                    i++
-                }
-            });
-            if(i==0)
-            {
-                check = false
-            }
-            result(null, checkLogin)
+            let dataLogin = {_id: res[0].userId}
+            let token = jwt.sign(dataLogin, 'loginToken')
+            result(null, token)
         }
     })
+}
+user_login.changePassword = (newPassword, result) => {
+
 }
 
 user_login.register = (newUser, result) => {

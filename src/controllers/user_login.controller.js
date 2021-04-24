@@ -1,5 +1,6 @@
 'use strict';
 const user_login = require('../models/user_login.model')
+const jwt = require('jsonwebtoken')
 
 exports.findAll = (req, res)=>{
     user_login.findAll((err, user_login)=>{
@@ -12,34 +13,26 @@ exports.findAll = (req, res)=>{
     })
 }
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
     let loginInfo = req.body
-    console.log(req.body)
-    console.log("131545")
     if(loginInfo.constructor === Object && Object.keys(loginInfo).length === 0){
         return res.status(400).send({ error:true, message: 'Invalid username or password' });
     }
     else {
-        user_login.login(loginInfo, (err, checkLogin)=>{
+        user_login.login(loginInfo, (err, token)=>{
             if(err)
             {
-                res.send("Da co loi xay ra! vui long thu lai!")
+                return res.json({
+                    value: false
+                })
             }
-            else{
-                if(checkLogin == false)
-                {
-                    res.send("sai tai khoan hoac mat khau!")
-                }
-                else
-                {
-                    if(checkLogin.role === 1)
-                    {
-                        res.send("Ban dang nhap voi quyen admin")
-                    }
-                    else if(checkLogin.role === 2){
-                        res.send("Ban dang nhap voi quyen user")
-                    }
-                }
+            else
+            {
+                console.log(token)
+                return res.json({
+                    value: true,
+                    token: token
+                })
             }
         })
     }
