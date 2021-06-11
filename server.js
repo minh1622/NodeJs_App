@@ -1,29 +1,16 @@
-const express = require("express")
+const express = require('express')
 const app = express()
-const bodyParser = require("body-parser")
-const user_login_router = require('./src/routes/user_login.route')
-const role_router = require('./src/routes/role.route')
-const cookieParser = require('cookie-parser')
+const path = require('path')
+port = process.env.port || 3000
+const myApp = require('./src/routes/App.router')
 
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
-app.use(cookieParser())
+app.use('/js', express.static(path.join(__dirname, '/public/js')));
+app.set('view engine', 'ejs')
+app.set('views', './src/views/appViews')
+app.use('/myapp', myApp)
 
-app.use(function(req,res,next){
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-})
 
-app.get("/", (req, res, next)=>{
-    res.send("HOME")
-})
 
-app.use('/api/v1/user', user_login_router)
-app.use('/api/v1/role', role_router)
-
-const port = process.env.port || 3000
 app.listen(port, ()=>{
-    console.log(`server listen on port ${port}`)
+    console.log(`server listen on ${port}`)
 })
