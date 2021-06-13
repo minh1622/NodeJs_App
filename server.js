@@ -3,7 +3,7 @@ const app = express()
 const path = require('path')
 const myApp = require('./src/routes/App.router')
 
-app.use('/js', express.static(path.join(__dirname, '/public/js')));
+app.use('/public', express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'ejs')
 app.set('views', './src/views/appViews')
 app.use('/myapp', myApp)

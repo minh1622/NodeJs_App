@@ -1,0 +1,33 @@
+
+.menu-child {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s linear;
+}   
+.menu-child-item {
+    width: 25%;
+}
+.menu-child-item h4 {
+    color: black;
+    background-color: rgb(240, 240, 240);   
+}
+
+.menu:hover .menu-child {
+    opacity: 1;
+    visibility: visible;
+}
+
+.my-item {
+    display: flex;
+    flex-direction: column;
+}
+.my-item-info:hover {
+    text-decoration: none;
+    background-color: rgb(240, 240, 240);
+}
