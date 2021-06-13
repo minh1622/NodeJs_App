@@ -11,8 +11,7 @@ app.get('/', (req,res)=>{
     res.render('homepage')
 })
 
-var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
-var server_host = process.env.YOUR_HOST || '0.0.0.0';
-app.listen(server_port, server_host, ()=>{
+var server_port = process.env.PORT || 3000;
+app.listen(server_port, ()=>{
     console.log(`server listen on ${server_port}`)
 })
