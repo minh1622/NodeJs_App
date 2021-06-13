@@ -13,4 +13,7 @@ router.get('/billCircuit', (req, res)=>{
 router.get('/drawFunc', (req,res)=>{
     res.render(views + 'drawFunc')
 })
+router.get('/dientich', (req,res)=>{
+    res.render(views + 'dientich')
+})
 module.exports = router
