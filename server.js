@@ -8,8 +8,9 @@ app.use('/js', express.static(path.join(__dirname, '/public/js')));
 app.set('view engine', 'ejs')
 app.set('views', './src/views/appViews')
 app.use('/myapp', myApp)
-
-
+app.get('/', (req,res)=>{
+    res.render('homepage')
+})
 
 app.listen(port, ()=>{
     console.log(`server listen on ${port}`)
