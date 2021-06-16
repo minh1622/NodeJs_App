@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dien tich cac hinh</title>
     <script src="/public/js/dientich.js"></script>
+    <%- include('../layout/header');%>
 </head>
+<style>
+    body {
+        text-align:center;
+        position: relative;
+        padding-bottom: 20px;
+    }
+</style>
 <body>
     <h2>Tinh dien tich hinh chu nhat</h2>
     <form name="hinhchunhatform">
@@ -44,4 +52,5 @@
         <h3 id="dientichhinhtron"></h3>
     </form>
 </body>
+<%- include('../layout/footer')%>
 </html>

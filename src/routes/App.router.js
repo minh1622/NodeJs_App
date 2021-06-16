@@ -2,18 +2,26 @@
 const express = require('express')
 const router = express.Router()
 
-const views = __dirname + '../../views/appViews/'
 
 router.get('/AngleToRad', (req,res)=>{
-    res.render(views + 'AngleToRad')
+    res.render('AngleToRad')
 })
 router.get('/billCircuit', (req, res)=>{
-    res.render(views + 'billCircuit')
+    res.render('billCircuit')
 })
 router.get('/drawFunc', (req,res)=>{
-    res.render(views + 'drawFunc')
+    res.render('drawFunc')
 })
 router.get('/dientich', (req,res)=>{
-    res.render(views + 'dientich')
+    res.render('dientich')
+})
+router.get('/thetich', (req,res)=>{
+    res.render('thetich')
+})
+router.get('/giatribieuthuc', (req,res)=>{
+    res.render('giatribieuthuc')
+})
+router.get('/dientichdatdai', (req,res)=>{
+    res.render('dientichdatdai')
 })
 module.exports = router
