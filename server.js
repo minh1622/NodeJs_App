@@ -1,14 +1,14 @@
 const express = require('express')
 const app = express()
-const path = require('path')
+const path = require('path');
+require('app-module-path').addPath(path.join(__dirname, '../'));
 const myApp = require('./src/routes/App.router')
 
 app.use('/public', express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'ejs')
-app.set('views', './src/views/appViews')
 app.use('/myapp', myApp)
 app.get('/', (req,res)=>{
-    res.render('homepage')
+    res.render('appViews/homepage')
 })
 
 var server_port = process.env.PORT || 3000;

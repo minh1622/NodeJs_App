@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change Money</title>
+    <%- include('../../layout/header');%>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, #FFCE00, #F7A800);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+h1{
+    margin-bottom: 50px;
+}
+.inputs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 768px;
+    margin: 0 auto;
+}
+input {
+    flex: 1 1 40%;
+    margin: 15px;
+    background-color: #FFF;
+    border-radius: 8px;
+    padding: 15px;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Change Money</h1>
+      </header>
+      <div class="inputs">
+        <input
+          type="number"
+          id="vnd"
+          class="vnd"
+          placeholder="Vnd......"
+        />
+        <input
+          type="number"
+          id="usd"
+          class="usd"
+          placeholder="Usd......"
+        />
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        $("#vnd").keyup(function(){  
+    // lấy giá trị của input "vnd" , dữ liệu lấy từ phần tử 0 của mảng 
+    var value = $("#vnd")[0].value; 
+   // nếu value khác 0 ,null , undefined
+    if(value){
+        $("#usd")[0].value = value/23000;
+    } else {
+        $("#usd")[0].value = null;
+    }
+})
+$("#usd").keyup(function(){
+    var value = $("#usd")[0].value;
+    $("#vnd")[0].value = value*23000;
+    if(value){
+        $("#vnd")[0].value = value*23000;
+    } else {
+        $("#vnd")[0].value = null;
+    }
+})
+
+    </script>
+  </body>
+  <%- include('../../layout/footer')%>
+</html>
