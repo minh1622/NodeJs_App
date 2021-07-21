@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../../layout/header');%>
+    <style>
+        * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.caption {
+  text-align: center;
+  font-weight: 700;
+  padding: 20px 0;
+}
+
+.center {
+  border: 1px solid black;
+  padding: 10px 0;
+  height: 100%;
+}
+
+/* Table */
+/* Infor */
+#table {
+  max-width: 80%;
+  margin: auto;
+  align-items: center;
+  border: 1px solid black;
+}
+
+#table .container {
+  height: 100px;
+}
+
+#table .infor .grid {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
+
+#table .infor .in {
+  text-align: left;
+  border: 1px solid black;
+  margin: 0 10px;
+  padding: 0 10px;
+}
+
+#table .infor .grade {
+  font-weight: 600;
+}
+
+#table .infor .cpa {
+  color: red;
+}
+
+/* Data */
+#table .data {
+  padding: 10px 10px;
+}
+
+#table .fpgrade,
+.ffgrade {
+  padding-left: 43px;
+  font-weight: 600;
+  font-size: 14.5px;
+}
+
+#table .data .grid {
+  grid-template-columns: 5% 35% 10% 10% 10% 10% 10% 10%;
+  grid-template-rows: 1fr;
+}
+
+/* Submit */
+.calculate {
+  width: 80%;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.calculate .submit {
+  float: right;
+  background-color: black;
+  padding: 10px 20px;
+  color: white;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+}
+
+.calculate .submit:hover {
+  cursor: pointer;
+}
+    </style>
+    <title>Calculator Grade For Student</title>
+  </head>
+  <body>
+    <h1 class="caption">Calculator Grade For Student</h1>
+    <div id="table">
+      <div class="infor">
+        <div class="container grid">
+          <span class="name in">Name: Dong Minh Thai</span>
+          <p class="class in">Class: Dien tu 03-K64</p>
+          <p class="indentity in">Student ID: 20193098</p>
+          <p class="grade in">Grade: <span class="cpa"></span></p>
+        </div>
+      </div>
+      <div class="data">
+        <div class="container-1 grid">
+          <!-- Row 1 -->
+          <p class="center order">Order</p>
+          <p class="center sub">Subject</p>
+          <p class="center credit">Credits</p>
+          <p class="center pgrade">P Grade</p>
+          <p class="center fterm">Term Grade</p>
+          <p class="center 10">Grade in 10</p>
+          <p class="center 4">Grade in 4</p>
+          <p class="center alpha">Grade in A</p>
+
+          <!-- Row 2 -->
+          <p class="center forder">1</p>
+          <p class="center fsub">Introduction to Electronics</p>
+          <p class="center fcredit">2</p>
+          <input type="text" class="center fpgrade" />
+          <input type="text" class="center ffgrade" />
+          <p class="center f10"></p>
+          <p class="center f4"></p>
+          <p class="center falpha"></p>
+
+          <!-- Row 3 -->
+          <p class="center forder">2</p>
+          <p class="center fsub">Analysis I</p>
+          <p class="center fcredit">4</p>
+          <input type="text" class="center fpgrade" />
+          <input type="text" class="center ffgrade" />
+          <p class="center f10"></p>
+          <p class="center f4"></p>
+          <p class="center falpha"></p>
+
+          <!-- Row 4 -->
+          <p class="center forder">3</p>
+          <p class="center fsub">Algebra</p>
+          <p class="center fcredit">4</p>
+          <input type="text" class="center fpgrade" />
+          <input type="text" class="center ffgrade" />
+          <p class="center f10"></p>
+          <p class="center f4"></p>
+          <p class="center falpha"></p>
+        </div>
+      </div>
+    </div>
+    <div class="calculate">
+      <button class="submit" onclick="outPut()">Calculate</button>
+    </div>
+    <script>
+        var cre = new Array(); //credit tin chi
+var fgrade = new Array(); // diem giua ki
+var tgrade = new Array(); // diem cuoi ki
+var grade10 = new Array(); // thang 10
+var grade4 = new Array(); // thang 4
+var gradeA = new Array(); // thang abcd
+var count = 0;
+
+//change and float
+function changeAF() {
+  var item = document.querySelectorAll(".fcredit");
+  var item2 = document.querySelectorAll(".fpgrade");
+  var item3 = document.querySelectorAll(".ffgrade");
+  count = item.length;
+  for (var i = 0; i < item.length; i++) {
+    cre[i] = parseFloat(item[i].textContent);
+    fgrade[i] = parseFloat(item2[i].value);
+    tgrade[i] = parseFloat(item3[i].value);
+  }
+  //   console.log(cre);
+  //   console.log(fgrade);
+  //   console.log(tgrade);
+}
+// Calculate grade
+function calculate() {
+  changeAF();
+  for (var i = 0; i < count; i++) {
+    grade10[i] = (0.3 * fgrade[i] + 0.7 * tgrade[i]).toFixed(2);
+    if (grade10[i] < 3.95) {
+      grade4[i] = 0;
+      gradeA[i] = "F";
+    } else if (grade10[i] >= 3.95 && grade10[i] <= 4.95) {
+      grade4[i] = 1;
+      gradeA[i] = "D";
+    } else if (grade10[i] > 4.95 && grade10[i] <= 5.4) {
+      grade4[i] = 1.5;
+      gradeA[i] = "D+";
+    } else if (grade10[i] > 5.4 && grade10[i] <= 6.4) {
+      grade4[i] = 2;
+      gradeA[i] = "C";
+    } else if (grade10[i] > 6.4 && grade10[i] <= 6.9) {
+      grade4[i] = 2.5;
+      gradeA[i] = "C+";
+    } else if (grade10[i] > 6.9 && grade10[i] <= 7.9) {
+      grade4[i] = 3;
+      gradeA[i] = "B";
+    } else if (grade10[i] > 7.9 && grade10[i] <= 8.4) {
+      grade4[i] = 3.5;
+      gradeA[i] = "B+";
+    } else if (grade10[i] > 8.4 && grade10[i] <= 9.4) {
+      grade4[i] = 4;
+      gradeA[i] = "A";
+    } else {
+      grade4[i] = 4;
+      gradeA[i] = "A+";
+    }
+  }
+}
+
+// Output
+function outPut() {
+  calculate();
+  var item = document.querySelectorAll(".f10");
+  var item1 = document.querySelectorAll(".f4");
+  var item2 = document.querySelectorAll(".falpha");
+  var cpa = 0;
+  var s = 0; //tong so tin credit
+  for (var i = 0; i < count; i++) {
+    cpa = cpa + cre[i] * grade4[i];
+    s = s + cre[i];
+    item[i].textContent = grade10[i];
+    item1[i].textContent = grade4[i];
+    item2[i].textContent = gradeA[i];
+  }
+  cpa = cpa / s;
+  document.querySelector(".cpa").textContent = cpa + "/4";
+}
+    </script>
+  </body>
+  <%- include('../../layout/footer')%>
+</html>

@@ -11,7 +11,7 @@ app.get('/', (req,res)=>{
     res.render('appViews/homepage')
 })
 
-var server_port = process.env.PORT || 3000;
+var server_port = process.env.PORT || 3333;
 app.listen(server_port, ()=>{
     console.log(`server listen on ${server_port}`)
 })

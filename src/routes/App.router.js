@@ -42,4 +42,13 @@ router.get('/changeImageColor', (req,res)=>{
 router.get('/tiendien-thue', (req,res)=>{
     res.render('appViews/tinhtoan/tiendien-thue')
 })
+router.get('/xemlich', (req,res)=>{
+    res.render('appViews/docgiatri/xemlich')
+})
+router.get('/chuoiFourier', (req,res)=>{
+    res.render('appViews/tinhtoan/chuoiFourier')
+})
+router.get('/ketquasv', (req,res)=>{
+    res.render('appViews/tinhtoan/ketquasv')
+})
 module.exports = router
